@@ -3,8 +3,7 @@
 setEnv(){
         cd
         cd poc/
-        unzip poc_admin-1.0.zip
-        mv poc_admin-1.0 ./pocadmin
+        mv spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar ./pocadmin.jar
 }
 
 startApp(){
