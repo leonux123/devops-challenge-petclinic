@@ -9,6 +9,6 @@ class WelcomeController {
 
     @GetMapping("/")
     public String welcome() {
-        return "welcome";
+        return "welcome v1.0";
     }
 }
