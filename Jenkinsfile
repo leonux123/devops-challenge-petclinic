@@ -8,7 +8,7 @@ pipeline {
         }
   	     stage('Build') {
 	            steps {
-	            	sh 'echo "Task: Build"'
+	            	sh './mvnw package'
             }
         }
 	    stage('Deliver for DEV') {
@@ -24,7 +24,7 @@ pipeline {
                 branch 'master' 
             }
             steps {
-	        sh 'echo "Task: Deliver for PROD"'
+	        sh 'echo "AWS Provisioning Task: Started"'
             }
         }
     }
