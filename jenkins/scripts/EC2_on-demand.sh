@@ -24,7 +24,7 @@ connect ()
 publish ()
 {
 	scp -v -i $key_location -o StrictHostKeyChecking=no $deploy_scripts $user@$AWS_IP:~/
-	scp -v -i $key_location -o StrictHostKeyChecking=no $zip_file $user@$AWS_IP:~/poc
+	scp -v -i $key_location -o StrictHostKeyChecking=no $jar_file $user@$AWS_IP:~/poc
 }
 
 # private
