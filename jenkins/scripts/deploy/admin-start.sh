@@ -2,6 +2,6 @@
 
 # Start admin
 cd
-nohup poc/pocadmin/bin/poc_admin > output.txt 2>&1 &
+java -jar poc/pocadmin.jar & echo $! > app.pid
 echo "done"
 exit 0;
