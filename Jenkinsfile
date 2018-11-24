@@ -25,6 +25,7 @@ pipeline {
             }
             steps {
 	        sh 'echo "AWS Provisioning Task: Started"'
+		    sh './jenkins/scripts/EC2_on-demand.sh start'
             }
         }
     }
