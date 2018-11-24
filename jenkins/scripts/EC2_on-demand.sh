@@ -6,11 +6,11 @@ imageid="ami-a0cfeed8" # Amazon Linux AMI 2018.03.0 (HVM)
 instance_type="t2.micro"
 key_name="MyKeyPair"
 sec_group_TCP="sg-09238c50b5c5aa1c6"
-sec_group_9000="sg-092e3f4bf89df868b"
+sec_group_8080="sg-0d04e3cac0e005a8d"
 wait_seconds="60" # seconds between polls for the public IP to populate (keeps it from hammering their API)
 key_location="/home/leonux/aws/MyKeyPair.pem" # SSH settings
 user="ec2-user" # SSH settings
-zip_file="target/universal/poc_admin-1.0.zip" # SSH settings
+jar_file="target/*.jar" # SSH settings
 deploy_scripts="jenkins/scripts/deploy/*.sh" # SSH settings
 
 
@@ -52,7 +52,7 @@ start ()
 {
 	echo "Starting instance..."	
 	
-	id=$(~/.local/bin/aws ec2 run-instances --image-id $imageid --count 1 --instance-type $instance_type --key-name $key_name --security-group-ids $sec_group_TCP $sec_group_9000 --query 'Instances[0].InstanceId' | grep -E -o "i\-[0-9A-Za-z]+")
+	id=$(~/.local/bin/aws ec2 run-instances --image-id $imageid --count 1 --instance-type $instance_type --key-name $key_name --security-group-ids $sec_group_TCP $sec_group_8080 --query 'Instances[0].InstanceId' | grep -E -o "i\-[0-9A-Za-z]+")
 	
 	INSTANCE_ID=$id
 	
