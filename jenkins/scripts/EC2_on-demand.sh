@@ -31,9 +31,9 @@ publish ()
 configEnv ()
 {
 
-        ansible all -i jenkins/scripts/ansible/hosts -u ec2-user --private-key=$key_location -b -a "yum -y update"
+        ansible all -i hosts -u ec2-user --private-key=$key_location -b -a "yum -y update"
         
-        ansible-playbook jenkins/scripts/ansible/configEC2.yml -i jenkins/scripts/ansible/hosts --private-key=$key_location
+        ansible-playbook jenkins/scripts/ansible/configEC2.yml -i hosts --private-key=$key_location
         
 }
 
@@ -79,7 +79,7 @@ start ()
 	
 	echo "Config Task: Started"
         
-        echo "$AWS_IP" > jenkins/scripts/ansible/hosts
+        echo "$AWS_IP" > hosts
 	
 	configEnv
 	
