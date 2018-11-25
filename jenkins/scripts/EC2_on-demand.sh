@@ -34,7 +34,7 @@ configEnv ()
         
         sleep 15
         
-        ansible-playbook configEC2.yml -i hosts --private-key=$key_location
+        ansible-playbook jenkins/scripts/ansible/configEC2.yml -i hosts --private-key=$key_location
         
         sleep 15
 }
