@@ -30,15 +30,13 @@ publish ()
 # private
 configEnv ()
 {
-	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP sudo yum -y remove java-1.7.0-openjdk
-	
-	sleep 15
-	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP sudo yum -y update
-	
-	sleep 15
-	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP sudo yum -y install java-1.8.0
-	
-	sleep 15
+	ansible all -i hosts -u ec2-user --private-key=$key_location -b -a "yum -y update"
+        
+        sleep 15
+        
+        ansible-playbook configEC2.yml -i hosts --private-key=$key_location
+        
+        sleep 15
 }
 
 # private
@@ -82,6 +80,8 @@ start ()
 	publish
 	
 	echo "Config Task: Started"
+        
+        echo "$AWS_IP" > jenkins/scripts/ansible/hosts
 	
 	configEnv
 	
