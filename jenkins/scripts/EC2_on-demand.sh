@@ -30,7 +30,7 @@ publish ()
 # private
 configEnv ()
 {
-	ansible all -i hosts -u ec2-user --private-key=$key_location -b -a "yum -y update"
+	ansible all -i jenkins/scripts/ansible/hosts -u ec2-user --private-key=$key_location -b -a "yum -y update"
         
         sleep 15
         
