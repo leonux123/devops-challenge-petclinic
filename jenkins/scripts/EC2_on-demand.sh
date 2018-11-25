@@ -32,7 +32,6 @@ configEnv ()
 {
 
         ansible all -i hosts -u ec2-user --private-key=$key_location -b -a "yum -y update"
-        
         ansible-playbook jenkins/scripts/ansible/configEC2.yml -i hosts --private-key=$key_location
         
 }
