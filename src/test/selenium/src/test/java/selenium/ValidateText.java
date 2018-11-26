@@ -23,7 +23,7 @@ public class ValidateText {
 	 String actualTitle = driver.getTitle();
          
         // check_app_version
-	 Assert.assertEquals("Condition true", "PetClinic v2.2", actualStr);
+	 Assert.assertEquals("Condition true", "PetClinic v2.4", actualStr);
 
 	// check_title_text
 	 Assert.assertEquals("Condition true", "PetClinic :: a Spring Framework demonstration", actualTitle);
