@@ -12,9 +12,15 @@ pipeline {
             }
             steps {
                 sh 'echo "AWS Provisioning Task: Started"'
-		sh './jenkins/scripts/EC2_on-demand.sh start'
+		sh './jenkins/scripts/EC2_on-demand.sh start'    
                 sh 'export IP=$(cat ip_from_file) && ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@$IP ./deploy.sh'
+
+                sleep(time:30,unit:"SECONDS")
+                    
 	        sh 'export IP=$(cat ip_from_file) && echo "Your app is ready: http://$IP:8080"'
+                sh 'echo "UI tests: Started"'
+                sh 'export IP=$(cat ip_from_file) && ./src/test/selenium/gradlew -Dbase.url=http://$IP:8080 -DbrowserType=htmlunit test'
+ 
 		input message: 'Finished using the web site? (Click "Proceed" to continue)'
 		sh 'echo "Terminate Task: Started"'
 		sh './jenkins/scripts/EC2_on-demand.sh terminate'
@@ -32,11 +38,6 @@ pipeline {
 		input message: 'Finished using the web site? (Click "Proceed" to continue)'
 		sh 'echo "Terminate Task: Started"'
 		sh './jenkins/scripts/EC2_on-demand.sh terminate'
-            }
-        }
-             stage('UI tests') {
-	            steps {
-                        sh 'export IP=$(cat ip_from_file) && ./src/test/selenium/gradlew -Dbase.url=http://$IP:8080 -DbrowserType=htmlunit test'
             }
         }
     }
