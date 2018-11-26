@@ -20,7 +20,7 @@ pipeline {
 	        sh 'export IP=$(cat ip_from_file) && echo "Your app is ready: http://$IP:8080"'
                     
                 sh 'echo "UI tests: Started"'
-                sh 'export IP=$(cat ip_from_file) && ./src/test/selenium/gradlew -Dbase.url=http://$IP:8080 -DbrowserType=htmlunit'
+                sh 'export IP=$(cat ip_from_file) && ./src/test/selenium/gradlew -Dbase.url=http://$IP:8080 -DbrowserType=htmlunit Test'
                 
                 publishHTML (target: [
                 reportDir: '/src/test/selenium/build/reports/tests/test',
