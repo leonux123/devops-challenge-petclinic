@@ -23,7 +23,7 @@ pipeline {
                 sh 'export IP=$(cat ip_from_file) && ./src/test/selenium/gradlew --build-file=src/test/selenium/build.gradle -Dbase.url=http://$IP:8080 -DbrowserType=htmlunit Test'
                 
                 publishHTML (target: [
-                reportDir: '/src/test/selenium/build/reports/tests/test',
+                reportDir: './src/test/selenium/build/reports/tests/test',
                 reportFiles: 'index.html',
                 reportName: "UI tests report"
                 ])
