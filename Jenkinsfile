@@ -16,7 +16,7 @@ pipeline {
 		sh './jenkins/scripts/EC2_on-demand.sh start'    
                 sh 'export IP=$(cat ip_from_file) && ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@$IP ./deploy.sh'
 
-                sleep(time:30,unit:"SECONDS")    
+                sleep(time:20,unit:"SECONDS")    
 	        sh 'export IP=$(cat ip_from_file) && echo "Your app is ready: http://$IP:8080"'
                     
                 sh 'echo "UI tests: Started"'
