@@ -20,10 +20,10 @@ pipeline {
 	        sh 'export IP=$(cat ip_from_file) && echo "Your app is ready: http://$IP:8080"'
                     
                 sh 'echo "UI tests: Started"'
-                sh 'export IP=$(cat ip_from_file) && /home/leonux/selenium/gradlew  --build-file=/home/leonux/selenium/foo.gradle -Dbase.url=http://$IP:8080 -DbrowserType=htmlunit Test'
+                sh 'export IP=$(cat ip_from_file) && ./src/test/selenium/gradlew  --build-file=./src/test/selenium/build.gradle -Dbase.url=http://$IP:8080 -DbrowserType=htmlunit Test'
                 
                 publishHTML (target: [
-                reportDir: '/home/leonux/selenium/build/reports/tests/test',
+                reportDir: './src/test/selenium/build/reports/tests/test',
                 reportFiles: 'index.html',
                 reportName: "UI tests report"
                 ])
@@ -42,7 +42,8 @@ pipeline {
 		sh './jenkins/scripts/EC2_on-demand.sh start'
                 sh 'export IP=$(cat ip_from_file) && ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@$IP ./deploy.sh'
 
-	        sh 'export IP=$(cat ip_from_file) && echo "Your app is ready: http://$IP:8080"'
+	        sleep(time:20,unit:"SECONDS")
+                sh 'export IP=$(cat ip_from_file) && echo "Your app is ready: http://$IP:8080"'
                     
 		input message: 'Finished using the web site? (Click "Proceed" to continue)'
 		sh 'echo "Terminate Task: Started"'
