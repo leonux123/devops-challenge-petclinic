@@ -1,11 +1,6 @@
 pipeline {
     agent any
     stages {
-    	   stage('Test') {
-	            steps {
-	            	sh 'echo "Task: Test"'
-            }
-        }
   	     stage('Build') {
 	            steps {
 	            	sh './mvnw package'
@@ -25,7 +20,7 @@ pipeline {
 		sh './jenkins/scripts/EC2_on-demand.sh terminate'
             }
         }
-        stage('Deliver for PROD') {
+            stage('Deploy to PROD') {
             when {
                 branch 'master' 
             }
@@ -37,6 +32,11 @@ pipeline {
 		input message: 'Finished using the web site? (Click "Proceed" to continue)'
 		sh 'echo "Terminate Task: Started"'
 		sh './jenkins/scripts/EC2_on-demand.sh terminate'
+            }
+        }
+             stage('UI tests') {
+	            steps {
+                        sh 'export IP=$(cat ip_from_file) && ./src/test/selenium/gradlew -Dbase.url=http://$IP:8080 -DbrowserType=htmlunit test'
             }
         }
     }
