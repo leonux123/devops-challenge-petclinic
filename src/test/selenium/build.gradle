@@ -22,16 +22,3 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
 }
-
-tasks.withType(Test) {
-    jvmArgs '-Xms128m', '-Xmx1024m'
-    maxParallelForks = 4
-    testLogging.showStandardStreams = true
-    
-	// System properties passed to tests
-	systemProperties = [
-		'base.url': System.getProperty('base.url', 'http://localhost:8080/'),
-		'browserType': System.getProperty('browserType', 'firefox')
-	]
-}
-
