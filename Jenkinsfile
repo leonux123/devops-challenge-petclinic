@@ -4,7 +4,7 @@ pipeline {
   	     stage('Build') {
 	            steps {
 	            	sh './mvnw package'
-                        junit 'target/surefire-report/*.xml'
+                        junit 'target/surefire-reports/*.xml'
             }
         }
 	    stage('Deliver for DEV') {
