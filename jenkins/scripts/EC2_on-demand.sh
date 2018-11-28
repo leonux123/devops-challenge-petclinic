@@ -17,7 +17,7 @@ deploy_scripts="jenkins/scripts/deploy/*.sh" # SSH settings
 # private
 connect ()
 {
-        ansible all -i hosts -u ec2-user --private-key=$key_location -b -a "mkdir poc"
+        ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP mkdir poc
 }
 
 # private
