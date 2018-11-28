@@ -70,14 +70,14 @@ start ()
 	echo "Trying to connect... $user@$AWS_IP"
 	
 	connect
+        
+        echo "$AWS_IP" > hosts
 	
 	echo "Publish Over SSH..."
 	
 	publish
 	
 	echo "Config Task: Started"
-        
-        echo "$AWS_IP" > hosts
 	
 	configEnv
 	
