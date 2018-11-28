@@ -1,0 +1,16 @@
+# copy.yml
+
+- name: copy scripts file1 to remote server
+  copy:
+     src: ../../../../jenkins/scripts/deploy/admin-start.sh
+     dest: ~/
+
+- name: copy scripts file2 to remote server
+  copy:
+     src: ../../../../jenkins/scripts/deploy/deploy.sh
+     dest: ~/
+      
+- name: copy jar file to remote server
+  copy:
+     src: ../../../../hosts
+     dest: ~/poc
