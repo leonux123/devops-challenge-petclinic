@@ -23,10 +23,8 @@ connect ()
 # private
 publish ()
 {
-        ansible all -i hosts -u ec2-user --private-key=$key_location -b -a copy -a "src=hosts dest=~/"
-        ansible all -i hosts -u ec2-user --private-key=$key_location -b -a copy -a "src=./jenkins/scripts/deploy/admin-start.sh dest=~/"
-        ansible all -i hosts -u ec2-user --private-key=$key_location -b -a copy -a "src=./jenkins/scripts/deploy/deploy.sh dest=~/"
-        ansible all -i hosts -u ec2-user --private-key=$key_location -b -a copy -a "src=./target/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar dest=~/poc"
+        ansible all -i hosts -u ec2-user --private-key=$key_location -b -m copy -a "src=hosts dest=~/hosts"
+        ansible-playbook jenkins/scripts/ansible/copyfile.yml -i hosts --private-key=$key_location
 }
 
 # private
