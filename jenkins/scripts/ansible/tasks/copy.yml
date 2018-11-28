@@ -2,10 +2,10 @@
 
   - name: copy scripts files to remote server
     copy:
-      src: jenkins/scripts/deploy/{{item}}
+      src: "{{ item }}"
       dest: ~/
-      with_items:
-        ['admin-start.sh','deploy.sh']
+      with_fileglob:
+        - ./jenkins/scripts/deploy/*.sh
 
   - name: copy jar file to remote server
     copy:
