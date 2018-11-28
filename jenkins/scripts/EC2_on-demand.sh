@@ -23,7 +23,8 @@ connect ()
 # private
 publish ()
 {
-	ansible-playbook jenkins/scripts/ansible/copy_file.yml -i hosts --private-key=$key_location
+        ansible all -i hosts -u ec2-user --private-key=$key_location -b -a copy -a "src=$deploy_scripts dest=~/"
+        ansible all -i hosts -u ec2-user --private-key=$key_location -b -a copy -a "src=$jar_file dest=~/poc"
 }
 
 # private
