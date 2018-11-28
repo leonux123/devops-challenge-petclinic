@@ -3,4 +3,14 @@
   become: yes
 
   tasks:
-    - include: 'tasks/copy.yml'
+  - name: copy scripts files to remote server
+    copy:
+      src: "{{ item }}"
+      dest: ~/
+      with_fileglob:
+        - ./jenkins/scripts/deploy/*.sh
+
+  - name: copy jar file to remote server
+    copy:
+      src: target/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar
+      dest: ~/poc 
