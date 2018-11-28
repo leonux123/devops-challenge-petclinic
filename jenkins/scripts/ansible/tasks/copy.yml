@@ -1,12 +1,16 @@
 # copy.yml
 
-  - name: copy scripts files to remote server
+ tasks:
+  - name: copy scripts file1 to remote server
     copy:
-      src: "{{ item }}"
+      src: jenkins/scripts/deploy/admin-start.sh
       dest: ~/
-      with_fileglob:
-        - ./jenkins/scripts/deploy/*.sh
 
+- name: copy scripts file2 to remote server
+    copy:
+      src: jenkins/scripts/deploy/deploy.sh
+      dest: ~/
+      
   - name: copy jar file to remote server
     copy:
       src: target/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar
