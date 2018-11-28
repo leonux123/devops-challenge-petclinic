@@ -1,6 +1,0 @@
-- hosts: all
-  user: ec2-user
-  become: yes
-
-  tasks:
-    - include: 'tasks/copy_file.yml'
