@@ -3,7 +3,7 @@
 - name: copy script file 1 to remote server
   copy:
      src: ../../../../jenkins/scripts/deploy/admin-start.sh
-     dest: ~/
+     dest: /home/ec2-user/
      owner: ec2-user 
      group: ec2-user
      mode: 0774
@@ -11,7 +11,7 @@
 - name: copy script file 2 to remote server
   copy:
      src: ../../../../jenkins/scripts/deploy/deploy.sh
-     dest: ~/
+     dest: /home/ec2-user/
      owner: ec2-user 
      group: ec2-user
      mode: 0774
@@ -19,7 +19,7 @@
 - name: copy jar file to remote server
   copy:
      src: ../../../../hosts
-     dest: ~/poc
+     dest: /home/ec2-user/poc
      owner: ec2-user 
      group: ec2-user
      mode: 0774
