@@ -17,14 +17,13 @@ deploy_scripts="jenkins/scripts/deploy/*.sh" # SSH settings
 # private
 connect ()
 {
-	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP mkdir poc
+        ansible all -i hosts -u ec2-user --private-key=$key_location -b -a "mkdir poc"
 }
 
 # private
 publish ()
 {
-	scp -v -i $key_location -o StrictHostKeyChecking=no $deploy_scripts $user@$AWS_IP:~/
-	scp -v -i $key_location -o StrictHostKeyChecking=no $jar_file $user@$AWS_IP:~/poc
+	ansible-playbook jenkins/scripts/ansible/copy_file.yml -i hosts --private-key=$key_location
 }
 
 # private
