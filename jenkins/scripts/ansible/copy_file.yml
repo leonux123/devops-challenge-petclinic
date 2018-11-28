@@ -1,13 +1,6 @@
 - hosts: all
   user: ec2-user
-  
-  tasks:
-  - name: copy scripts files to remote server
-    copy:
-      src: jenkins/scripts/deploy/*.sh
-      dest: ~/ 
+  become: yes
 
-  - name: copy jar file to remote server
-    copy:
-      src: target/*.jar
-      dest: ~/poc 
+  tasks:
+    - include: 'tasks/copy.yml'

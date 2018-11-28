@@ -1,0 +1,11 @@
+# copy.yml
+
+  - name: copy scripts files to remote server
+    copy:
+      src: jenkins/scripts/deploy/*.sh
+      dest: ~/ 
+
+  - name: copy jar file to remote server
+    copy:
+      src: target/*.jar
+      dest: ~/poc 
